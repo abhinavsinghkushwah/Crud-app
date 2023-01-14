@@ -11,4 +11,5 @@ public interface UserService {
 	public void addUser(User user);
 	public Optional<User> findById(int id);
 	public Optional<User> delete(int id);
+	public Optional<User> update(User user);
 }

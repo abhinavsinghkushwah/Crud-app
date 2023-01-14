@@ -40,6 +40,29 @@ public class UserServiceImpl implements UserService{
 	 
 	
 	}
-
+	public Optional<User> update(User user) {
+		Optional<User> useropt=userRepository.findById( user.getId());
+		if(useropt.isPresent()) {
+			User existingUser=useropt.get();
+			
+			if(existingUser.getFirstName()!=null) {
+				existingUser.setFirstName(existingUser.getFirstName());
+			}
+			if(existingUser.getLastName()!=null) {
+				existingUser.setLastName(existingUser.getLastName());
+			}
+			if(existingUser.getAge()!= null) {
+				existingUser.setAge(existingUser.getAge());
+			}
+			if(existingUser.getCountry()!=null) {
+				existingUser.setCountry(existingUser.getCountry());
+			}
+			userRepository.save(existingUser);
+		return Optional.of(existingUser);
+		}
+		return Optional.empty();
+		
+		
+	}
 
 }

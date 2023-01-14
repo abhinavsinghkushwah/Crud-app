@@ -45,7 +45,7 @@ public class User {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	public int getAge() {
+	public Integer getAge() {
 		return age;
 	}
 	@Override
