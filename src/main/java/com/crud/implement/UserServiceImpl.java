@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.crud.model.User;
 import com.crud.repository.UserRepository;
@@ -37,9 +39,9 @@ public class UserServiceImpl implements UserService{
 	}
 	public Optional<User> findById(int id){
 	 return userRepository.findById(id);
-	 
-	
 	}
+	 
+
 	public Optional<User> update(User user) {
 		Optional<User> useropt=userRepository.findById( user.getId());
 		if(useropt.isPresent()) {

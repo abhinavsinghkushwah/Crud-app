@@ -1,6 +1,5 @@
 package com.crud.controller;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -23,27 +22,30 @@ import com.crud.service.UserService;
 public class UserController {
 	@Autowired
 	public UserService userService;
-	
+
 	@GetMapping
 	public List<User> findall() {
 		return userService.findAll();
 	}
+
 	@PostMapping("/add")
 	public void addUser(@RequestBody User user) {
 		userService.addUser(user);
-	
+
 	}
+
 	@GetMapping("/{id}")
 	public Optional<User> findbyId(@PathVariable int id) {
 		return userService.findById(id);
 	}
-	
+
+
 	@PutMapping("/update")
-	public Optional<User> update(@RequestBody User user){
-		Optional<User> optUser=userService.update(user);
-		if(optUser.isPresent()) {
+	public Optional<User> update(@RequestBody User user) {
+		Optional<User> optUser = userService.update(user);
+		if (optUser.isPresent()) {
 			return optUser;
 		}
 		return Optional.empty();
-}
+	}
 }
