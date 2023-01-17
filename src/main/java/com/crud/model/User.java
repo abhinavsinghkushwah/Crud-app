@@ -20,7 +20,34 @@ public class User {
 	private String lastName;
 	private String country;
 	private Integer age;
+	private String username;
+	private String password;
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	public User(String firstName, String lastName, String country, Integer age, String username,
+			String password) {
+		super();
 	
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.country = country;
+		this.age = age;
+		this.username = username;
+		this.password = password;
+	}
 	public int getId() {
 		return id;
 	}
@@ -69,8 +96,8 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [firstName=" + firstName + "id= "+id+", lastName=" + lastName + ", country=" + country + ", age=" + age
-				+ "]";
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", country=" + country
+				+ ", age=" + age + ", username=" + username + ", password=" + password + "]";
 	}
 	
 	public User() {

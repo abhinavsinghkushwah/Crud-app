@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,10 +14,15 @@ import com.crud.model.User;
 import com.crud.repository.UserRepository;
 import com.crud.service.UserService;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class UserServiceImpl implements UserService{
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	PasswordEncoder encoder;
 	
 	@Override
 	public List<User> findAll() {
@@ -25,6 +31,7 @@ public class UserServiceImpl implements UserService{
 	}
 	@Override
 	public void addUser(User user) {
+		user.setPassword(encoder.encode(user.getPassword()));
 		userRepository.save(user);
 	}
 	
@@ -48,16 +55,25 @@ public class UserServiceImpl implements UserService{
 			User existingUser=useropt.get();
 			
 			if(existingUser.getFirstName()!=null) {
-				existingUser.setFirstName(existingUser.getFirstName());
+				existingUser.setFirstName(user.getFirstName());
 			}
 			if(existingUser.getLastName()!=null) {
-				existingUser.setLastName(existingUser.getLastName());
+				existingUser.setLastName(user.getLastName());
 			}
 			if(existingUser.getAge()!= null) {
-				existingUser.setAge(existingUser.getAge());
+				existingUser.setAge(user.getAge());
 			}
 			if(existingUser.getCountry()!=null) {
-				existingUser.setCountry(existingUser.getCountry());
+				existingUser.setCountry(user.getCountry());
+			}
+			if(existingUser.getAge()!=null) {
+				existingUser.setAge(user.getAge());
+			}
+			if(existingUser.getUsername()!=null) {
+				existingUser.setUsername(null);
+			}
+			if(existingUser.getPassword()!=null) {
+				existingUser.setPassword(encoder.encode(user.getPassword()));
 			}
 			userRepository.save(existingUser);
 		return Optional.of(existingUser);
