@@ -11,9 +11,9 @@ import com.crud.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
 
-	
-//	public List<User> findByfirstName(String firstName);
-//	public List<User> findByLastName(String lastName);
-//	public List<User> findByCountry(String Country);
-//	public List<User> findByAge(int age);
+	public List<User> findByUsername(String lastName);
+	public List<User> findByFirstName(String firstName);
+	public List<User> findByLastName(String lastName);
+	public List<User> findByCountry(String Country);
+	public List<User> findByAge(int age);
 }

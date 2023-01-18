@@ -82,5 +82,29 @@ public class UserServiceImpl implements UserService{
 		
 		
 	}
+	public List<User> findByCriteria(String criteria, String searchitem){
+		switch(criteria) {
+		case "username":
+			return userRepository.findByUsername(searchitem);
+		case "firstName":
+			return userRepository.findByFirstName(searchitem);
+		case "lastName":
+			return userRepository.findByLastName(searchitem);
+		case "age":
+			try {
+				Integer age= Integer.valueOf(searchitem);
+				return userRepository.findByAge(age);
+			
+			}
+			catch(NumberFormatException e) {
+				System.out.println("nope, cant do");
+				
+			}
+			return new ArrayList<>();
+		case "country":
+			return userRepository.findByCountry(searchitem);
+		}
+		return new ArrayList<>();
+	}
 
 }

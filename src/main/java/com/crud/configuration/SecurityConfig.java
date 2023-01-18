@@ -40,10 +40,11 @@ public class SecurityConfig {
 	@Bean
 	 public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 		http.headers().frameOptions().disable();
-		return http.authorizeHttpRequests().requestMatchers("/h2").permitAll()
-		.requestMatchers("/api/users/**").hasRole("ADMIN")
-		.requestMatchers("/api/users/**").hasRole("USER")
-			.and().httpBasic().and().csrf().disable().build();
+		return http.httpBasic().and().csrf().disable()
+				.formLogin().loginProcessingUrl("/login").and()
+				.authorizeHttpRequests().requestMatchers("/login").permitAll()
+			.anyRequest().authenticated()
+			.and().build();
 		
 	}
 }

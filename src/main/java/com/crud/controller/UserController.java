@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.crud.model.User;
@@ -38,7 +39,11 @@ public class UserController {
 	public Optional<User> findbyId(@PathVariable int id) {
 		return userService.findById(id);
 	}
-
+	@GetMapping("/search")
+	public List<User> findByCriteria(@RequestParam(name="criteria", required=true)String criteria, 
+			@RequestParam(name="searchItem", required=true) String searchitem){
+		return userService.findByCriteria(criteria, searchitem);
+	}
 
 	@PutMapping("/update")
 	public Optional<User> update(@RequestBody User user) {

@@ -12,5 +12,5 @@ public interface UserService {
 	public Optional<User> findById(int id);
 	public Optional<User> delete(int id);
 	public Optional<User> update(User user);
-	
+	public List<User> findByCriteria(String criteria, String searchitem);
 }
